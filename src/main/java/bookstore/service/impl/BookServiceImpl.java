@@ -3,13 +3,14 @@ package bookstore.service.impl;
 import bookstore.entity.Book;
 import bookstore.repository.BookRepository;
 import bookstore.service.BookService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
+
     @Autowired
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
