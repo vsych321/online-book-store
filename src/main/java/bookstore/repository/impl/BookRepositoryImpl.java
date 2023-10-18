@@ -4,20 +4,16 @@ import bookstore.entity.Book;
 import bookstore.exception.DataProcessingException;
 import bookstore.repository.BookRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+@RequiredArgsConstructor
 @Repository
 public class BookRepositoryImpl implements BookRepository {
     private final SessionFactory sessionFactory;
-
-    @Autowired
-    public BookRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Override
     public Book save(Book book) {
@@ -45,7 +41,7 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
-                    "select b from Book b", Book.class).getResultList();
+                    "from Book b", Book.class).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get any books from DB", e);
         }
