@@ -25,7 +25,7 @@ public class BookRepositoryImpl implements BookRepository {
             entityManager.persist(book);
             transaction.commit();
             return book;
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
