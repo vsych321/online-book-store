@@ -31,12 +31,12 @@ public class BookRepositoryImpl implements BookRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new EntityNotFoundException("Can't insert book into db " + book, e);
         } finally {
             if (entityManager != null) {
                 entityManager.close();
             }
         }
+        return book;
     }
 
     @Override
