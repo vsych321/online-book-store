@@ -43,4 +43,3 @@ public class Book {
     @Column(nullable = false)
     private boolean isDeleted = false;
 }
-

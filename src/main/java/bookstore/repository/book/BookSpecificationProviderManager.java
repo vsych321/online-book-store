@@ -1,6 +1,7 @@
 package bookstore.repository.book;
 
 import bookstore.entity.Book;
+import bookstore.exception.SpecificationNotFoundException;
 import bookstore.repository.SpecificationProvider;
 import bookstore.repository.SpecificationProviderManager;
 import java.util.List;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class BookSpecificationProviderManager implements SpecificationProviderManager<Book> {
-
     private List<SpecificationProvider<Book>> bookSpecificationProviders;
 
     @Override
@@ -18,7 +18,7 @@ public class BookSpecificationProviderManager implements SpecificationProviderMa
         return bookSpecificationProviders.stream()
                 .filter(p -> p.getKey().equals(key))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException(
+                .orElseThrow(() -> new SpecificationNotFoundException(
                         "Can't find correct specification provider for key " + key));
     }
 }

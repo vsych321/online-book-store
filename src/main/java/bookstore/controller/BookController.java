@@ -18,20 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping
     public List<BookDto> getAll() {
         return bookService.findAll();
     }
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.getById(id);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public BookDto createBook(@RequestBody CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
@@ -43,9 +46,9 @@ public class BookController {
         bookService.deleteById(id);
     }
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/search")
     public List<BookDto> searchBooks(BookSearchParametersDto searchParameters) {
         return bookService.searchBookByParams(searchParameters);
     }
-
 }
