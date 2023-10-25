@@ -1,9 +1,6 @@
 package bookstore.exception;
 
-import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -19,10 +16,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = EntityNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFoundException(
-            EntityNotFoundException ex
-    ) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -31,14 +26,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpHeaders headers,
             HttpStatusCode status,
             WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .toList();
-        body.put("errors", errors);
-        return new ResponseEntity<>(body, headers, status);
+        return new ResponseEntity<>(errors, headers, status);
     }
 
     private String getErrorMessage(ObjectError e) {
