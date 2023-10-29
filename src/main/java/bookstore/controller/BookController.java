@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Positive;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
-    public List<BookDto> getAll(Pageable pageable) {
+    public List<BookDto> getAll(@PageableDefault Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
@@ -70,8 +71,6 @@ public class BookController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/search")
-    @Operation(summary = "Search books by requirements",
-            description = "Search book by certain requirements")
     public List<BookDto> searchBooks(BookSearchParametersDto searchParameters, Pageable pageable) {
         return bookService.searchBookByParams(searchParameters, pageable);
     }
