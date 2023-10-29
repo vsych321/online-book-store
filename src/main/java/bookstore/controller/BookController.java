@@ -35,7 +35,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
-    public List<BookDto> getAll(@PageableDefault Pageable pageable) {
+    public List<BookDto> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
