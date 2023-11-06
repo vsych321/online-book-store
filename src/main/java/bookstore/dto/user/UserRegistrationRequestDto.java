@@ -15,11 +15,11 @@ public record UserRegistrationRequestDto(
         String email,
 
         @NotBlank
-        @Size(min = 8)
+        @Size(min = 8, max = 80)
         String password,
 
         @NotBlank
-        @Size(min = 8)
+        @Size(min = 8, max = 80)
         String repeatPassword,
 
         @NotBlank

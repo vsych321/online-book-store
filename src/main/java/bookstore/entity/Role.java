@@ -11,16 +11,12 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 @Entity
-@SQLDelete(sql = "UPDATE roles SET is_deleted = true WHERE id = ?")
-@Where(clause = "is_deleted=false")
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
     @Id
@@ -30,9 +26,6 @@ public class Role implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
     private RoleName name;
-
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
 
     @Override
     public String getAuthority() {
