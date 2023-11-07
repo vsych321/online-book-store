@@ -9,12 +9,17 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
 public class BookRepositoryImpl implements BookRepository {
     private final EntityManagerFactory entityManagerFactory;
+    private final SessionFactory sessionFactory;
 
     @Override
     public Book save(Book book) {
@@ -53,6 +58,9 @@ public class BookRepositoryImpl implements BookRepository {
     public Optional<Book> findById(Long id) {
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             return Optional.ofNullable(entityManager.find(Book.class, id));
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery(
+                    "from Book b", Book.class).getResultList();
         } catch (Exception e) {
             throw new EntityNotFoundException("Can't find book by id " + id, e);
         }
