@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "books")
-@Data
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,3 +32,4 @@ public class Book {
     private String description;
     private String coverImage;
 }
+
