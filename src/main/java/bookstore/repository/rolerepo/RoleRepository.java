@@ -1,4 +1,4 @@
-package bookstore.repository.role;
+package bookstore.repository.rolerepo;
 
 import bookstore.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

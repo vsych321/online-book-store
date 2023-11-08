@@ -1,4 +1,4 @@
-package bookstore.repository.book;
+package bookstore.repository.bookrepo;
 
 import bookstore.entity.Book;
 import bookstore.exception.SpecificationNotFoundException;

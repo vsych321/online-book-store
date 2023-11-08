@@ -6,8 +6,8 @@ import bookstore.entity.Role;
 import bookstore.entity.User;
 import bookstore.exception.RegistrationException;
 import bookstore.mapper.UserMapper;
-import bookstore.repository.role.RoleRepository;
-import bookstore.repository.user.UserRepository;
+import bookstore.repository.rolerepo.RoleRepository;
+import bookstore.repository.userrepo.UserRepository;
 import bookstore.service.UserService;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toUser(request);
         user.setRoles(Collections.singleton(roleRepository
-                .findRoleByName(Role.RoleName.ROLE_USER)));
+                .findRoleByName(Role.RoleName.ROLE_ADMIN)));
         user.setPassword(passwordEncoder.encode(request.password()));
         user.setEmail(request.email());
         User savedUser = userRepository.save(user);

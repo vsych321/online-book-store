@@ -1,4 +1,4 @@
-package bookstore.repository.book.spec;
+package bookstore.repository.bookrepo.spec;
 
 import bookstore.entity.Book;
 import bookstore.repository.SpecificationProvider;
@@ -7,15 +7,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TitleSpecificationProvider implements SpecificationProvider<Book> {
+public class AuthorSpecificationProvider implements SpecificationProvider<Book> {
     @Override
     public String getKey() {
-        return "title";
+        return "author";
     }
 
     public Specification<Book> getSpecification(String[] params) {
         return (root, query, criteriaBuilder) -> root
-                .get("title")
-                .in(Arrays.stream(params).toArray());
+                .get("author").in(Arrays.stream(params)
+                        .toArray());
     }
 }
