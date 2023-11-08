@@ -32,21 +32,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
     private final BookService bookService;
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
     public List<BookDto> getAll(@PageableDefault Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     @Operation(summary = "Get book by id", description = "Get available book by certain id")
     public BookDto getBookById(@PathVariable @Positive Long id) {
         return bookService.getById(id);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping
     @Operation(summary = "Create a new book", description = "Create a new book")
     public BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
@@ -54,7 +54,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update book by id", description = "Change parameters")
     public BookDto update(@PathVariable Long id,
                           @RequestBody @Valid CreateBookRequestDto requestDto
@@ -69,7 +69,7 @@ public class BookController {
         bookService.deleteById(id);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/search")
     public List<BookDto> searchBooks(BookSearchParametersDto searchParameters, Pageable pageable) {
         return bookService.searchBookByParams(searchParameters, pageable);
