@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthenticationController {
-
     private final UserService userService;
-
     private final AuthenticationService authenticationService;
 
     @Operation(summary = "Login to website",
