@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
                 .findRoleByName(Role.RoleName.ROLE_USER)));
         user.setPassword(passwordEncoder.encode(request.password()));
         user.setEmail(request.email());
-        User savedUser = userRepository.save(user);
-        return userMapper.toUserResponse(savedUser);
+        return userMapper.toUserResponse(userRepository.save(user));
     }
 }
