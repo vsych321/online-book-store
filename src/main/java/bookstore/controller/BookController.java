@@ -51,7 +51,7 @@ public class BookController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create a new book", description = "Create a new book")
     public BookDtoWithoutCategoryIds createBook(

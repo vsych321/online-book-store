@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 @FieldMatch(fields = {"password", "repeatedPassword"},
         message = "passwords must be matched")
 public record UserRegistrationRequestDto(
-
         @Email
         @NotBlank
         @Size(min = 4, max = 50)
