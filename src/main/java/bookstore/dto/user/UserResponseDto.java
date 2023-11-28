@@ -2,6 +2,7 @@ package bookstore.dto.user;
 
 public record UserResponseDto(
         Long id,
+
         String email,
 
         String firstName,
@@ -9,6 +10,5 @@ public record UserResponseDto(
         String lastName,
 
         String shippingAddress
-
 ){
 }
