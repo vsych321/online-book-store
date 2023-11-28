@@ -14,6 +14,6 @@ public class BookDto {
     private String isbn;
     private BigDecimal price;
     private String description;
-    private String coverImag;
+    private String coverImage;
     private List<Long> categoryIds;
 }

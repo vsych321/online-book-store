@@ -36,7 +36,7 @@ public class CategoryController {
     private final BookService bookService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create a book with category",
             description = "Create a book with certain category")
@@ -46,7 +46,6 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Operation(summary = "Get all categories", description = "Get all categories")
     public List<CategoryResponseDto> getAll(@PageableDefault Pageable pageable) {
@@ -54,7 +53,6 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     @Operation(summary = "Get category by id",
             description = "Get available category by id")
@@ -64,7 +62,6 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @Operation(summary = "Update category by id",
             description = "Change parameters")
@@ -84,7 +81,6 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}/books")
     @Operation(summary = "Get books by category id",
             description = "")

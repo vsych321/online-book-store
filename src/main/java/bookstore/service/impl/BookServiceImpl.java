@@ -38,7 +38,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable)
                 .stream()
@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public BookDto getById(Long id) {
         return bookRepository.findById(id)
                 .map(bookMapper::toDto)
@@ -83,7 +83,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public List<BookDtoWithoutCategoryIds> findBooksByCategoryId(Long id, Pageable pageable) {
         return bookRepository.findAllByCategoryId(id)
                 .stream()
