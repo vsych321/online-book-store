@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-        id: insert-roles-to-db
+        id: insert-roles
         author: vsych
         changes:
           - insert:

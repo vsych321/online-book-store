@@ -57,6 +57,4 @@ public class Book {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
-
-
 }

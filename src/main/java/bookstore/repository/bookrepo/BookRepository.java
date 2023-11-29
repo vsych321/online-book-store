@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
-
-    //@EntityGraph(attributePaths = "categories")
     @Query("select b from Book b join fetch b.categories c where c.id = :id")
     List<Book> findAllByCategoryId(Long id);
 }
