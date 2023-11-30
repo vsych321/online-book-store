@@ -1,8 +1,8 @@
 package bookstore.mapper;
 
-import bookstore.dto.book.BookDto;
-import bookstore.dto.book.BookDtoWithoutCategoryIds;
-import bookstore.dto.book.CreateBookRequestDto;
+import bookstore.dto.bookdto.BookDto;
+import bookstore.dto.bookdto.BookDtoWithoutCategoryIds;
+import bookstore.dto.bookdto.CreateBookRequestDto;
 import bookstore.entity.Book;
 import bookstore.entity.Category;
 import org.mapstruct.AfterMapping;

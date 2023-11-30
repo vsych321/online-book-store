@@ -1,7 +1,7 @@
 package bookstore.service;
 
-import bookstore.dto.category.CategoryResponseDto;
-import bookstore.dto.category.CreateCategoryRequestDto;
+import bookstore.dto.categorydto.CategoryResponseDto;
+import bookstore.dto.categorydto.CreateCategoryRequestDto;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 

@@ -21,6 +21,8 @@ import org.hibernate.annotations.Where;
 
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "categories")
+@ToString(exclude = "categories")
 @Entity
 @SQLDelete(sql = "UPDATE books SET is_deleted = true WHERE id =?")
 @Where(clause = "is_deleted=false")
@@ -54,8 +56,6 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
 
 
