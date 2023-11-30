@@ -1,8 +1,11 @@
 package bookstore.mapper;
 
-import bookstore.dto.BookDto;
-import bookstore.dto.CreateBookRequestDto;
+import bookstore.dto.book.BookDto;
+import bookstore.dto.book.BookDtoWithoutCategoryIds;
+import bookstore.dto.book.CreateBookRequestDto;
 import bookstore.entity.Book;
+import bookstore.entity.Category;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -20,4 +23,13 @@ public interface BookMapper {
     Book toBook(CreateBookRequestDto requestDto);
 
     void updateBook(CreateBookRequestDto dto, @MappingTarget Book book);
+
+    BookDtoWithoutCategoryIds toDtoWithoutCategories(Book book);
+
+    @AfterMapping
+    default void setCategoryIds(@MappingTarget BookDto bookDto, Book book) {
+        bookDto.setCategoryIds(book.getCategories().stream()
+                .map(Category::getId)
+                .toList());
+    }
 }

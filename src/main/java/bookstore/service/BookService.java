@@ -1,13 +1,14 @@
 package bookstore.service;
 
-import bookstore.dto.BookDto;
-import bookstore.dto.BookSearchParametersDto;
-import bookstore.dto.CreateBookRequestDto;
+import bookstore.dto.book.BookDto;
+import bookstore.dto.book.BookDtoWithoutCategoryIds;
+import bookstore.dto.book.BookSearchParametersDto;
+import bookstore.dto.book.CreateBookRequestDto;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 public interface BookService {
-    BookDto save(CreateBookRequestDto requestDto);
+    BookDtoWithoutCategoryIds save(CreateBookRequestDto requestDto);
 
     List<BookDto> findAll(Pageable pageable);
 
@@ -18,4 +19,6 @@ public interface BookService {
     List<BookDto> searchBookByParams(BookSearchParametersDto parameters, Pageable pageable);
 
     BookDto update(Long id, CreateBookRequestDto requestDto);
+
+    List<BookDtoWithoutCategoryIds> findBooksByCategoryId(Long id, Pageable pageable);
 }

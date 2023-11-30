@@ -1,8 +1,9 @@
 package bookstore.controller;
 
-import bookstore.dto.BookDto;
-import bookstore.dto.BookSearchParametersDto;
-import bookstore.dto.CreateBookRequestDto;
+import bookstore.dto.book.BookDto;
+import bookstore.dto.book.BookDtoWithoutCategoryIds;
+import bookstore.dto.book.BookSearchParametersDto;
+import bookstore.dto.book.CreateBookRequestDto;
 import bookstore.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,7 +35,6 @@ public class BookController {
     private final BookService bookService;
 
     @PreAuthorize("hasRole('USER')")
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
     public List<BookDto> getAll(@PageableDefault Pageable pageable) {
@@ -42,7 +42,6 @@ public class BookController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     @Operation(summary = "Get book by id", description = "Get available book by certain id")
     public BookDto getBookById(@PathVariable @Positive Long id) {
@@ -53,13 +52,13 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create a new book", description = "Create a new book")
-    public BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
+    public BookDtoWithoutCategoryIds createBook(
+            @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update book by id", description = "Change parameters")
     public BookDto update(@PathVariable Long id,
                           @RequestBody @Valid CreateBookRequestDto requestDto
@@ -76,7 +75,6 @@ public class BookController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/search")
     public List<BookDto> searchBooks(BookSearchParametersDto searchParameters, Pageable pageable) {
         return bookService.searchBookByParams(searchParameters, pageable);

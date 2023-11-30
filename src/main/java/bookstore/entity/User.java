@@ -58,8 +58,8 @@ public class User implements UserDetails {
     @EqualsAndHashCode.Exclude
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
