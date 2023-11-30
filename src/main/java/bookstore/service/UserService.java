@@ -1,7 +1,7 @@
 package bookstore.service;
 
-import bookstore.dto.user.UserRegistrationRequestDto;
-import bookstore.dto.user.UserResponseDto;
+import bookstore.dto.userdto.UserRegistrationRequestDto;
+import bookstore.dto.userdto.UserResponseDto;
 
 public interface UserService {
 

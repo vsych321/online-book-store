@@ -1,7 +1,7 @@
 package bookstore.mapper;
 
-import bookstore.dto.user.UserRegistrationRequestDto;
-import bookstore.dto.user.UserResponseDto;
+import bookstore.dto.userdto.UserRegistrationRequestDto;
+import bookstore.dto.userdto.UserResponseDto;
 import bookstore.entity.User;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -14,7 +14,7 @@ import org.mapstruct.NullValueCheckStrategy;
         implementationPackage = "<PACKAGE_NAME>.impl"
 )
 public interface UserMapper {
-    UserResponseDto toUserResponse(User user);
+    UserResponseDto toDto(User user);
 
     User toUser(UserRegistrationRequestDto requestDto);
 }

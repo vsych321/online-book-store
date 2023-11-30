@@ -1,5 +1,6 @@
 package bookstore.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Collection;
 import java.util.HashSet;
@@ -58,7 +60,12 @@ public class User implements UserDetails {
     @EqualsAndHashCode.Exclude
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "is_deleted")
+    @OneToOne(fetch = FetchType.LAZY,
+            mappedBy = "user",orphanRemoval = true,
+            optional = false, cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
+
+    @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
     @Override

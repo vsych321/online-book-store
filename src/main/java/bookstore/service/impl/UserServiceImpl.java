@@ -1,13 +1,14 @@
 package bookstore.service.impl;
 
-import bookstore.dto.user.UserRegistrationRequestDto;
-import bookstore.dto.user.UserResponseDto;
+import bookstore.dto.userdto.UserRegistrationRequestDto;
+import bookstore.dto.userdto.UserResponseDto;
 import bookstore.entity.Role;
+import bookstore.entity.ShoppingCart;
 import bookstore.entity.User;
 import bookstore.exception.RegistrationException;
 import bookstore.mapper.UserMapper;
-import bookstore.repository.rolerepo.RoleRepository;
-import bookstore.repository.userrepo.UserRepository;
+import bookstore.repository.role.RoleRepository;
+import bookstore.repository.user.UserRepository;
 import bookstore.service.UserService;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,16 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toUser(request);
         user.setRoles(Collections.singleton(roleRepository
                 .findRoleByName(Role.RoleName.ROLE_ADMIN)));
-        user.setPassword(passwordEncoder.encode(request.password()));
         user.setEmail(request.email());
-        return userMapper.toUserResponse(userRepository.save(user));
+        user.setPassword(passwordEncoder.encode(request.password()));
+        createShoppingCart(user);
+        User savedUser = userRepository.save(user);
+        return userMapper.toDto(savedUser);
+    }
+
+    private void createShoppingCart(User user) {
+        ShoppingCart cart = new ShoppingCart();
+        cart.setUser(user);
+        user.setShoppingCart(cart);
     }
 }

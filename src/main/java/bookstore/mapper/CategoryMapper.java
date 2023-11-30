@@ -1,7 +1,7 @@
 package bookstore.mapper;
 
-import bookstore.dto.category.CategoryResponseDto;
-import bookstore.dto.category.CreateCategoryRequestDto;
+import bookstore.dto.categorydto.CategoryResponseDto;
+import bookstore.dto.categorydto.CreateCategoryRequestDto;
 import bookstore.entity.Category;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
