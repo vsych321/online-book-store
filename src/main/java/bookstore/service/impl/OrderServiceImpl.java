@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,7 +64,6 @@ public class OrderServiceImpl implements OrderService {
                     return orderItem;
                 })
                 .collect(Collectors.toSet());
-
     }
 
     private Order create(CreateOrderRequestDto requestDto, User user, ShoppingCart cart) {
@@ -85,9 +85,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderResponseDto> findAll(Authentication authentication) {
+    public List<OrderResponseDto> findAll(Authentication authentication, Pageable pageable) {
         User user = (User) userDetailsService.loadUserByUsername(authentication.getName());
-        return orderRepository.findAllByUserId(user.getId())
+        return orderRepository.findAllByUserId(user.getId(), pageable)
                 .stream()
                 .map(orderMapper::toDto)
                 .toList();
@@ -116,8 +116,10 @@ public class OrderServiceImpl implements OrderService {
     public OrderItemResponseDto getOrderItemById(
             Long orderId, Authentication authentication, Long orderItemId) {
         User user = (User) userDetailsService.loadUserByUsername(authentication.getName());
-        orderRepository.findByIdAndUserId(orderId, user.getId());
-        OrderItem orderItem = orderItemRepository.findByIdAndOrderId(orderId, orderItemId)
+        Order order = orderRepository.findByIdAndUserId(orderId, user.getId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find order by id " + orderId));
+        OrderItem orderItem = orderItemRepository.findByIdAndOrderId(order.getId(), orderItemId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Can't find item by id " + orderItemId));
         return orderItemMapper.toDto(orderItem);

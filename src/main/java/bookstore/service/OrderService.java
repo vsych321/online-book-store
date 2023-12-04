@@ -6,6 +6,7 @@ import bookstore.dto.orderdto.OrderResponseDto;
 import bookstore.dto.orderdto.OrderWithoutItemsDto;
 import bookstore.dto.orderdto.UpdateOrderStatusRequestDto;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 
 public interface OrderService {
@@ -13,7 +14,7 @@ public interface OrderService {
     OrderWithoutItemsDto createOrder(
             Authentication authentication, CreateOrderRequestDto requestDto);
 
-    List<OrderResponseDto> findAll(Authentication authentication);
+    List<OrderResponseDto> findAll(Authentication authentication, Pageable pageable);
 
     OrderWithoutItemsDto updateOrderStatus(Long id, UpdateOrderStatusRequestDto requestDto);
 
