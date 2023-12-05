@@ -7,7 +7,8 @@ ___
   <a href="#project-architecture">Project architecture</a> ♦
   <a href="#database-structure">Database structure</a> ♦
   <a href="#models">Main Models</a> ♦
-  <a href="#how-to-run">How run this project</a> ♦
+
+[//]: # (  <a href="#how-to-run">How run this project</a> ♦)
   <a href="#controllers">Controllers</a> ♦
   <a href="#contacts">Contacts</a>
 </p>
