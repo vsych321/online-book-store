@@ -3,7 +3,6 @@ package bookstore.controller;
 import bookstore.dto.order.itemdto.OrderItemResponseDto;
 import bookstore.dto.orderdto.CreateOrderRequestDto;
 import bookstore.dto.orderdto.OrderResponseDto;
-import bookstore.dto.orderdto.OrderWithoutItemsDto;
 import bookstore.dto.orderdto.UpdateOrderStatusRequestDto;
 import bookstore.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,7 +38,7 @@ public class OrderController {
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderWithoutItemsDto createOrder(Authentication authentication,
+    public OrderResponseDto createOrder(Authentication authentication,
                                             @Valid @RequestBody CreateOrderRequestDto dto) {
         return orderService.createOrder(authentication, dto);
     }
@@ -57,7 +56,7 @@ public class OrderController {
             description = "update certain order with appropriate status")
     @PatchMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public OrderWithoutItemsDto updateStatusById(
+    public OrderResponseDto updateStatusById(
             @PathVariable @Positive Long id,
             @RequestBody UpdateOrderStatusRequestDto requestDto) {
         return orderService.updateOrderStatus(id, requestDto);

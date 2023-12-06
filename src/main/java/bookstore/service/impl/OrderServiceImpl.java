@@ -3,7 +3,6 @@ package bookstore.service.impl;
 import bookstore.dto.order.itemdto.OrderItemResponseDto;
 import bookstore.dto.orderdto.CreateOrderRequestDto;
 import bookstore.dto.orderdto.OrderResponseDto;
-import bookstore.dto.orderdto.OrderWithoutItemsDto;
 import bookstore.dto.orderdto.UpdateOrderStatusRequestDto;
 import bookstore.entity.CartItem;
 import bookstore.entity.Order;
@@ -41,14 +40,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public OrderWithoutItemsDto createOrder(
+    public OrderResponseDto createOrder(
             Authentication authentication, CreateOrderRequestDto requestDto) {
         User user = getUser(authentication);
         ShoppingCart cart = shoppingCartRepository.findByUserId(user.getId());
         Order order = create(requestDto, user, cart);
         order.setOrderItems(setItems(order, cart.getCartItems()));
         cart.clearCartItems();
-        return orderMapper.toDtoWithoutItems(orderRepository.save(order));
+        return orderMapper.toDto(orderRepository.save(order));
     }
 
     @Override
@@ -61,11 +60,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderWithoutItemsDto updateOrderStatus(Long id, UpdateOrderStatusRequestDto requestDto) {
+    public OrderResponseDto updateOrderStatus(Long id, UpdateOrderStatusRequestDto requestDto) {
         Order order = orderRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find order by id " + id));
         order.setStatus(requestDto.status());
-        return orderMapper.toDtoWithoutItems(orderRepository.save(order));
+        return orderMapper.toDto(orderRepository.save(order));
     }
 
     @Override
