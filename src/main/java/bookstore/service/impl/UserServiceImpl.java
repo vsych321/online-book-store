@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toUser(request);
         user.setRoles(Collections.singleton(roleRepository
-                .findRoleByName(Role.RoleName.ROLE_ADMIN)));
+                .findRoleByName(Role.RoleName.ROLE_USER)));
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
         createShoppingCart(user);
