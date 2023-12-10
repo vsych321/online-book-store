@@ -1,11 +1,11 @@
 package bookstore.service.impl;
 
-import bookstore.dto.category.CategoryResponseDto;
-import bookstore.dto.category.CreateCategoryRequestDto;
+import bookstore.dto.categorydto.CategoryResponseDto;
+import bookstore.dto.categorydto.CreateCategoryRequestDto;
 import bookstore.entity.Category;
 import bookstore.exception.EntityNotFoundException;
 import bookstore.mapper.CategoryMapper;
-import bookstore.repository.categoryrepo.CategoryRepository;
+import bookstore.repository.category.CategoryRepository;
 import bookstore.service.CategoryService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

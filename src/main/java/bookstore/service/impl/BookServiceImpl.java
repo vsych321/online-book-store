@@ -1,16 +1,16 @@
 package bookstore.service.impl;
 
-import bookstore.dto.book.BookDto;
-import bookstore.dto.book.BookDtoWithoutCategoryIds;
-import bookstore.dto.book.BookSearchParametersDto;
-import bookstore.dto.book.CreateBookRequestDto;
+import bookstore.dto.bookdto.BookDto;
+import bookstore.dto.bookdto.BookDtoWithoutCategoryIds;
+import bookstore.dto.bookdto.BookSearchParametersDto;
+import bookstore.dto.bookdto.CreateBookRequestDto;
 import bookstore.entity.Book;
 import bookstore.entity.Category;
 import bookstore.exception.EntityNotFoundException;
 import bookstore.mapper.BookMapper;
-import bookstore.repository.bookrepo.BookRepository;
-import bookstore.repository.bookrepo.BookSpecificationBuilder;
-import bookstore.repository.categoryrepo.CategoryRepository;
+import bookstore.repository.book.BookRepository;
+import bookstore.repository.book.BookSpecificationBuilder;
+import bookstore.repository.category.CategoryRepository;
 import bookstore.service.BookService;
 import java.util.HashSet;
 import java.util.List;
