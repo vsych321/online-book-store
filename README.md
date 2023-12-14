@@ -7,11 +7,11 @@ ___
   <a href="#project-architecture">Project architecture</a> ♦
   <a href="#database-structure">Database structure</a> ♦
   <a href="#models">Main Models</a> ♦
-
-[//]: # (  <a href="#how-to-run">How run this project</a> ♦)
+  <a href="#how-to-run">How run this project</a> ♦
   <a href="#controllers">Controllers</a> ♦
   <a href="#contacts">Contacts</a>
 </p>
+
 ___
 <h2 id="introduction"> Introduction</h2>
 
@@ -36,14 +36,14 @@ our team is here to make your book-buying experience exceptional.
  <li><img src="images/hibernate-logo.png" alt="" width="25"> Hibernate</li>
  <li><img src="images/liquibase.png" alt="" width="25"> Liquibase</li>
 
-[//]: # ( <li><img src="assets/junit5-logo.png" alt="" width="25"> JUnit5 <i><small>&#40;+ Mockito&#41;</small></i></li>)
-[//]: # ( <li><img src="assets/docker.png" alt="" width="25"> <a href="https://www.docker.com/">Docker</a></li>)
-[//]: # ( <li><img src="assets/Swagger-logo.png" alt="" width="25"> Swagger</li>)
+ <li><img src="images/junit5.png" alt="" width="25"> JUnit5 <i><small>(+ Mockito)</small></i></li>
+ <li><img src="images/docker.png" alt="" width="25"> <a href="https://www.docker.com/">Docker</a></li>
+ <li><img src="images/swagger.png" alt="" width="25"> Swagger</li>
 </ul>
 
 <h2 id="project-architecture"> Project architecture </h2>
 
-![Project architecture](images/img.png)
+![Project architecture](images/architecture.png)
 
 <h2 id="database-structure"> 🛢️ Database structure </h2>
 
@@ -145,6 +145,26 @@ capturing key details such as quantity and price.
 * Price: Decimal value indicating the price of a single unit of the associated book within the order.
 </details>
 
+<h2 id="how-to-run"> How run this project</h2>
+
+1. Make sure you have installed next tools
+ <li><img src="images/java.png" alt="" width="25"> JDK 17+</li>
+ <li><img src="images/docker.png" alt="" width="25"> <a href="https://www.docker.com/">Docker</a></li>
+
+2. Clone project
+```text
+git clone https://github.com/vsych321/online-book-store.git
+```
+
+3. Create `.env` file  in the root of project and populate variables from `.env.sample` file
+
+4. Run the following command to build and start the Docker containers
+```
+docker-compose up --build
+```
+5. The application should now be running at http://localhost:8081.
+
+
 <h2 id="controllers"> Controllers and endpoints available ⬇</h2>
 
 Unauthorized customers can access endpoints to see all books or additional info about the book.
@@ -206,9 +226,9 @@ Admin can modify data: add a new book, update info about them, update book's sta
 
 Email:volodymyr.sych.jv@gmail.com
 
-Telegram:https://t.me/vodolym11
+[Telegram](https://t.me/vodolym11)
 
-LinkedIn:https://www.linkedin.com/in/volodymyr-sych-b2958a290/
+[LinkedIn](https://www.linkedin.com/in/volodymyr-sych-b2958a290/)
 
 
 
