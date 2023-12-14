@@ -52,7 +52,7 @@ public class ShoppingCartController {
     @Operation(summary = "update quantity of book",
             description = "update the quantity of available books")
     @PutMapping("/cart-items/{cartItemId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public CartItemResponseDto updateQuantityOfCartItem(
             @PathVariable @Positive Long cartItemId,
             @Valid @RequestBody UpdateCartItemRequestDto request) {
