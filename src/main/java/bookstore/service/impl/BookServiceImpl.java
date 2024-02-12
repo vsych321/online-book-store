@@ -5,16 +5,14 @@ import bookstore.dto.bookdto.BookDtoWithoutCategoryIds;
 import bookstore.dto.bookdto.BookSearchParametersDto;
 import bookstore.dto.bookdto.CreateBookRequestDto;
 import bookstore.entity.Book;
-import bookstore.entity.Category;
 import bookstore.exception.EntityNotFoundException;
 import bookstore.mapper.BookMapper;
 import bookstore.repository.book.BookRepository;
 import bookstore.repository.book.BookSpecificationBuilder;
 import bookstore.repository.category.CategoryRepository;
 import bookstore.service.BookService;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -83,7 +81,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDtoWithoutCategoryIds> findBooksByCategoryId(Long id, Pageable pageable) {
+    public List<BookDtoWithoutCategoryIds> findBooksByCategoryId(Long id) {
         return bookRepository.findAllByCategoryId(id)
                 .stream()
                 .map(bookMapper::toDtoWithoutCategories)
@@ -91,7 +89,8 @@ public class BookServiceImpl implements BookService {
     }
 
     private void setCategories(Book book, List<Long> categoryIds) {
-        Set<Category> categories = new HashSet<>(categoryRepository.findAllById(categoryIds));
-        book.setCategories(categories);
+        book.setCategories(categoryIds.stream()
+                .map(categoryRepository::getReferenceById)
+                .collect(Collectors.toSet()));
     }
 }

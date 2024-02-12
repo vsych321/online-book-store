@@ -2,11 +2,13 @@ package bookstore.dto.bookdto;
 
 import java.math.BigDecimal;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookDto {
     private Long id;
     private String title;
