@@ -85,8 +85,7 @@ public class CategoryController {
     @Operation(summary = "Get books by category id",
             description = "")
     public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(
-            @PathVariable @Positive Long id,
-            @PageableDefault Pageable pageable) {
-        return bookService.findBooksByCategoryId(id, pageable);
+            @PathVariable @Positive Long id) {
+        return bookService.findBooksByCategoryId(id);
     }
 }
